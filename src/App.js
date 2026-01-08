@@ -460,7 +460,7 @@ const LoginScreen = ({ employees, onLogin, onAdminLogin, lang, setLang }) => {
               {isAdminMode ? t.loginAdminLabel : t.loginEmpLabel}
             </label>
             <input
-              type={isAdminMode ? "password" : "text"}
+              type="password" // Changed to password for better UX
               value={accessCode}
               onChange={(e) => setAccessCode(e.target.value)}
               className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-lg text-center tracking-widest"
@@ -1295,15 +1295,8 @@ export default function App() {
   const handleUpdateShift = async (shiftId, updatedData) => {
     if (!user) return;
     try {
-      const shiftRef = doc(
-        db,
-        "artifacts",
-        appId,
-        "public",
-        "data",
-        "shifts",
-        shiftId
-      );
+      // FIX: Use the same path as collection(db, "shifts")
+      const shiftRef = doc(db, "shifts", shiftId);
       await updateDoc(shiftRef, updatedData);
       alert(translations[lang].shiftUpdated);
     } catch (error) {
