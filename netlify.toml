@@ -1,6 +1,18 @@
 [build]
+  # פקודת הבנייה
   command = "CI=false npm run build"
+  # תיקיית הפלט
   publish = "build"
 
+# הגדרת משתני סביבה גלובליים לכל סוגי ה-Deploy
 [build.environment]
+  NODE_VERSION = "18.16.0"
+  CI = "false"
+  # דגל זה עוזר לפתור התנגשויות גרסאות אם ישנן
   NPM_FLAGS = "--legacy-peer-deps"
+
+[[redirects]]
+  # הגדרה קריטית ל-React Router
+  from = "/*"
+  to = "/index.html"
+  status = 200
